@@ -17,8 +17,8 @@ import java.util.ArrayList;
  * Description:UserDaoTest
  * date: 2019-07-17 16:16
  *
- * @author: hx
- * @version: 1.0
+ * author: hx
+ * version: 1.0
  **/
 @RunWith(SpringRunner.class)
 @SpringBootTest()
