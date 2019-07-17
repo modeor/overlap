@@ -6,6 +6,7 @@ import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -60,7 +61,7 @@ public class ShiroConfig {
      **/
     @Bean
     public SecurityManager securityManager(){
-        DefaultSecurityManager securityManager = new DefaultSecurityManager();
+        DefaultSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(userRealm());
         //securityManager.setRememberMeManager(rememberMeManage());
         return securityManager;
@@ -79,7 +80,7 @@ public class ShiroConfig {
         //散列算法，这里使用md5
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
         //散列次数，相当于md5(md5())
-        hashedCredentialsMatcher.setHashIterations(2);
+        //hashedCredentialsMatcher.setHashIterations(2);
         return hashedCredentialsMatcher;
     }
 

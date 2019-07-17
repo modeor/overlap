@@ -3,8 +3,11 @@ package com.ingram.overlap.controller;
 import com.ingram.overlap.bean.vo.LoginParam;
 import com.ingram.overlap.server.LoginService;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,17 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @author: hx
  * @version: 1.0
  **/
-@Controller
-@RestController("/sys")
+@RestController
+@RequestMapping("/sys")
 public class LoginController {
 
     @Autowired
     private LoginService loginService;
 
     @RequestMapping("/login")
-    public void login(LoginParam param){
-        new
-        SecurityUtils.setSecurityManager(securityManager);
+    public String login(@RequestBody LoginParam param){
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(param.getUserName(), param.getPassword());
+        subject.login(token);
+        return "ok";
     }
 
     @RequestMapping("/addUser")

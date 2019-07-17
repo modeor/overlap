@@ -2,6 +2,9 @@ package com.ingram.overlap.dao;
 
 import com.ingram.overlap.bean.po.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Description:
@@ -12,5 +15,9 @@ import org.apache.ibatis.annotations.Mapper;
  **/
 @Mapper
 public interface UserDao {
-    public User findUserByName(String userName);
+    User findUserByName(@Param("username") String userName);
+
+    int insert(@Param("user") User user);
+
+    int delete(@Param("userList") List<User> userList);
 }
