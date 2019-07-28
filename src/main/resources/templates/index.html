@@ -2,11 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>首页</title>
+    <script src="https://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
 </head>
 <body>
-    <p>nononoono</p>
-    <p>aaaaaaaa</p>
-<p>bbbbbbb</p>
+<form method="post" id="userInfo">
+    <input type="text" id="userName" placeholder="用户名">
+    <input type="password" id="password" placeholder="密码">
+    <input type="submit" value="登录" onclick="login()"/>
+</form>
+<input type="button" value="注册" onclick="test()">
 </body>
 </html>
+<script>
+  function login () {
+    var userName = document.getElementById('userName')
+    var password = document.getElementById('password')
+    //post()方式
+    $.post({
+      url: 'localhost:8080/sys/login',
+      data: {userName: '张三', password: 12},
+      success: function (data) {
+        console.log('11')
+      },
+      error: function (error) {
+        console.log(error)
+      },
+    })
+  }
+
+  function test () {
+    alert('test')
+  }
+</script>

@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 /**
  * Description:
  * date: 2019-03-27 11:08
@@ -13,8 +15,7 @@ import lombok.Setter;
  **/
 @Data
 public class SysUser {
-    private String userId;
-    private String name;
+    private Long userId;
+    private String userName;
     private String password;
-    private int age;
 }
