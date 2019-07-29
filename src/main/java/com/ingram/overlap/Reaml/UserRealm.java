@@ -2,12 +2,13 @@ package com.ingram.overlap.Reaml;
 
 import com.ingram.overlap.bean.po.User;
 import com.ingram.overlap.dao.UserDao;
-import com.ingram.overlap.server.LoginService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.realm.AuthenticatingRealm;
+import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 /**
  * Description:
@@ -36,13 +37,8 @@ public class UserRealm extends AuthenticatingRealm {
         String userName = (String) authenticationToken.getPrincipal();
         String password = new String((char[]) authenticationToken.getCredentials());
         User user = userDao.findUserByName(userName);
-        if (user==null||!password.equals(user.getPassword())){
-            throw new UnknownAccountException();
-        }
-        if (user.getLocked()!=0){
-            throw new LockedAccountException();
-        }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), getName());
+        ByteSource salt = ByteSource.Util.bytes(user.getPasswordSalt());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(),salt, getName());
         return info;
     }
 }

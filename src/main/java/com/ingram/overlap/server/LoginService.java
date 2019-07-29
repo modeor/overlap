@@ -1,5 +1,6 @@
 package com.ingram.overlap.server;
 
+import com.ingram.overlap.bean.vo.UserInfo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
  * @author: hx
  * @version: 1.0
  **/
-@Service
-public class LoginService {
+public interface LoginService {
+    void register(UserInfo userInfo);
+
+    void modifyUser(UserInfo userInfo);
 }

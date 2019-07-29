@@ -20,4 +20,6 @@ public interface UserDao {
     int insert(@Param("user") User user);
 
     int delete(@Param("userList") List<User> userList);
+
+    int update(@Param("user") User user);
 }
