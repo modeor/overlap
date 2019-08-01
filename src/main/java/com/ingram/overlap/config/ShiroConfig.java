@@ -1,11 +1,13 @@
 package com.ingram.overlap.config;
 
 import com.ingram.overlap.Reaml.UserRealm;
+import com.ingram.overlap.filter.OverlapAuthenticationFilter;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
@@ -43,11 +45,14 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("");
         //自定义过滤器
         Map<String, Filter> filterMap = new LinkedHashMap<>();
+        //FormAuthenticationFilter authenticationFilter = new FormAuthenticationFilter();
+        //filterMap.put("authc", authenticationFilter);
         shiroFilterFactoryBean.setFilters(filterMap);
         //权限控制map
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/static/**", "anon");
-        filterChainDefinitionMap.put("/logout", "logout");
+        //filterChainDefinitionMap.put("/static/**", "anon");
+        //filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
