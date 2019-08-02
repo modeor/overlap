@@ -38,7 +38,7 @@ public class ShiroConfig {
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //设置默认跳转到登录页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/");
         //设置登录成功页面
         shiroFilterFactoryBean.setSuccessUrl("");
         //设置无权限跳转页面
@@ -50,8 +50,8 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilters(filterMap);
         //权限控制map
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        //filterChainDefinitionMap.put("/static/**", "anon");
         //filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/login","anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

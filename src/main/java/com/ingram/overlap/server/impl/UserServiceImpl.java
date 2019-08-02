@@ -3,7 +3,7 @@ package com.ingram.overlap.server.impl;
 import com.ingram.overlap.bean.po.User;
 import com.ingram.overlap.bean.vo.UserInfo;
 import com.ingram.overlap.dao.UserDao;
-import com.ingram.overlap.server.LoginService;
+import com.ingram.overlap.server.UserService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +19,9 @@ import org.springframework.stereotype.Service;
  * @version: 1.0
  **/
 @Service
-public class LoginServiceImpl implements LoginService {
+public class UserServiceImpl implements UserService {
 
-    private Logger log = LoggerFactory.getLogger(LoginServiceImpl.class);
+    private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     private UserDao userDao;
 
@@ -44,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
         user.setPassword(md5Hash);
         user.setPasswordSalt(userInfo.getUserName());
         user.setLocked(1);
-
         int insert = userDao.update(user);
+        log.info("修改用户："+user.getUserName()+",成功数:"+insert);
     }
 }

@@ -25,7 +25,7 @@
     </delete>
     <update id="update">
         update sys_user
-        set username=#{user.username},
+        set username=#{user.userName},
             password=#{user.password},
             password_salt=#{user.passwordSalt},
             locked=#{user.locked}
