@@ -1,4 +1,4 @@
-package com.ingram.overlap.filter;
+package com.ingram.overlap.infrastructure.filter;
 
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.slf4j.Logger;

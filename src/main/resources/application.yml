@@ -9,4 +9,4 @@ spring:
     #type: com.alibaba.druid.pool.DruidDataSource
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
-  type-aliases-package: com.ingram.overlap.bean.*
+  type-aliases-package: com.ingram.overlap.domain.bean.*

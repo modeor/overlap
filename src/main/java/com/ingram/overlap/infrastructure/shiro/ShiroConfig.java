@@ -1,21 +1,15 @@
-package com.ingram.overlap.config;
+package com.ingram.overlap.infrastructure.shiro;
 
-import com.ingram.overlap.Reaml.UserRealm;
-import com.ingram.overlap.filter.OverlapAuthenticationFilter;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.Cookie;
-import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.springframework.context.annotation.DependsOn;
 
 import javax.servlet.Filter;

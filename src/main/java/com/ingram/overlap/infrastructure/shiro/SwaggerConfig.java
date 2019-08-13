@@ -1,4 +1,4 @@
-package com.ingram.overlap.config;
+package com.ingram.overlap.infrastructure.shiro;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,13 +1,17 @@
-package com.ingram.overlap.Reaml;
+package com.ingram.overlap.infrastructure.shiro;
 
-import com.ingram.overlap.bean.po.User;
-import com.ingram.overlap.dao.UserDao;
-import org.apache.shiro.authc.*;
+import com.ingram.overlap.application.repository.UserRepository;
+import com.ingram.overlap.domain.user.User;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.realm.AuthenticatingRealm;
-import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Optional;
 
 
 /**
@@ -21,7 +25,7 @@ public class UserRealm extends AuthenticatingRealm {
 
     private static Logger log = LoggerFactory.getLogger(UserRealm.class);
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     /**
      * Description 权限认证
@@ -36,9 +40,13 @@ public class UserRealm extends AuthenticatingRealm {
         log.info("登录认证");
         String userName = (String) authenticationToken.getPrincipal();
         String password = new String((char[]) authenticationToken.getCredentials());
-        User user = userDao.findUserByName(userName);
-        ByteSource salt = ByteSource.Util.bytes(user.getPasswordSalt());
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(),salt, getName());
+        Optional<User> optionalUser = userRepository.findByUserName(userName);
+        if (!optionalUser.isPresent()) {
+            throw new AuthenticationException("用户不存在");
+        }
+
+        User user = optionalUser.get();
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), getName());
         return info;
     }
 }
